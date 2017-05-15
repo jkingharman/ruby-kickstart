@@ -8,8 +8,5 @@ def encrypt(message)
   message
 end
 
-def decrypt(message)
-  message
-end
 
 end
