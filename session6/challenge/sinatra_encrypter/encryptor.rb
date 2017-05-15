@@ -16,4 +16,9 @@ def encrypt(message)
   message.chars.map {|letter| cipher[letter]}.join('')
 end
 
+def decrypt(message)
+  cipher = create_ciphor.invert
+  message.chars.map {|letter| cipher[letter]}.join('')
+end
+
 end
