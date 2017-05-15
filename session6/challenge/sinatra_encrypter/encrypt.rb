@@ -1,7 +1,7 @@
 
 require 'sinatra'
 require 'shotgun'
-require_relative 'encryptor'
+require_relative './encryptor'
 
 include Encryptor
 
