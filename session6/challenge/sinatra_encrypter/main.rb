@@ -3,6 +3,8 @@ require 'sinatra'
 require 'shotgun'
 require_relative 'encryptor'
 
+include Encryptor
+
 get "/encrypt" do
 erb :new
 end
@@ -10,8 +12,7 @@ end
 # Functionining as your create controller.
 post "/encrypt" do
 
-encryptor = Encryptor.new
-encrypted_message = encryptor.encrypt(params[:message])
+encrypted_message = encrypt(params[:message])
 
 erb :index, locals: {encrypted_message: encrypted_message}
 
