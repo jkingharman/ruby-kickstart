@@ -6,12 +6,9 @@
 # got_three? ['a', 'a', 'a']  # => true
 # got_three? [1, 2, 1, 1]     # => false
 
-def got_three?(arr)
-   consec = []
-   arr.each_with_index do |item, i|
-     consec << item if consec.include?(item) || i == 0
-     consec.clear if !consec.include?(item)
-     break if consec.size == 3
-   end
-  consec.size == 3 ? true : false
+def got_three?(elements)
+  elements.each_cons(3) do |a, b, c|
+     true if a == b && b == c
+  end
+  false
 end

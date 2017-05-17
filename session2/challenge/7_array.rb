@@ -10,9 +10,8 @@
 # alternate_words("Elementary, my dear Watson!")  # => ["Elementary", "dear"]
 
 def alternate_words(arr)
-	alternate = []
-	cleaned_words = arr.scan(/\w+'?\w+/)
-	cleaned_words.each_with_index {|word, i| alternate << word if i.even? }
-	alternate.last[-1] = "" unless alternate.last[-1] =~ /\w/
-	alternate
+	  alternate = []
+		mod = arr.gsub(/[\#&\*\(\)\-=_\+\[\]:;,\.\/<>\?\\]/, ' ')
+		mod.split(' ').each_with_index {|word, i| alternate << word if i.even?}
+		alternate
 end
