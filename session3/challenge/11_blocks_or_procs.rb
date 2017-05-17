@@ -30,5 +30,15 @@
 # end
 
 
-def array_init
+def array_init(size=5)
+        if block_given?
+			    my_arr = Array.new(size) do |index|
+				  index = yield(index)
+			    end
+        else
+			   my_arr = Array.new(size) do |index|
+				   index = index * 100
+				   index.to_s
+          end
+		  end
 end

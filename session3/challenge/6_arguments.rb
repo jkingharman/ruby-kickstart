@@ -17,3 +17,49 @@
 # match_maker true,  true,  true, true, nil     # => [false, true]
 # match_maker true,  true,  true, 0, nil        # => [false, true]
 
+
+
+def match_maker(*args)
+
+	matching_rule = args[0]
+	args[0] = nil
+	args.delete(nil)
+	outer_arr = []
+	inner_arr = []
+	i = 0
+
+	while i < args.size
+		if inner_arr.size == 2
+			outer_arr << inner_arr
+			inner_arr = []
+		end
+		inner_arr << args[i]
+		i += 1
+	end
+
+	outer_arr << inner_arr
+
+	outer_arr.map! do |arr|
+
+		if matching_rule
+			if arr[0] == false && arr[1] == false
+				arr = false
+			elsif arr[0] == true && arr[1] == true
+			    arr = false
+			else
+				arr = true
+			end
+
+		elsif not matching_rule
+			if arr[0] == false && arr[1] == false
+				arr = true
+			elsif arr[0] == true && arr[1] == true
+			    arr = true
+			else
+				arr = false
+			end
+		end
+	end
+
+	outer_arr.flatten
+end

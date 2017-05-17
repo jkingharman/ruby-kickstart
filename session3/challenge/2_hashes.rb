@@ -8,3 +8,16 @@
 # staircase 4  # => {1 => [], 3 => [2]}
 # staircase 5  # => {1 => [], 3 => [2], 5 =>[2, 4]}
 
+
+def staircase(num)
+  i = 1
+  stairs = {}
+  num.times do
+      if i.odd?
+        evens = [*1..i].select {|num| num.even? }
+        stairs[i] = evens
+      end
+      i += 1
+  end
+  stairs
+end

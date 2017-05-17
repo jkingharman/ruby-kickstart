@@ -29,4 +29,34 @@
 # shared [1,2,3], [3,2,1]            # => [{1=>[true, true], 2=>[true, true], 3=>[true, true]}, [1, 2, 3]]
 
 def shared(a, b)
+
+  joined_arr = a + b
+  unique_arr = joined_arr.uniq
+
+  hash = {}
+  unique_arr.each do |val|
+    arr = []
+    if a.include?(val)
+      hash[val] = arr << true
+    else
+       hash[val] = arr << nil
+     end
+
+     if b.include?(val)
+       hash[val] = arr << true
+     else
+       hash[val] = arr << nil
+     end
+   end
+
+   sorted = []
+   a.each do |item|
+   sorted << item if b.include?(item)
+ end
+  sorted.sort
+
+  final = []
+  final << hash
+  final << sorted
+
 end
