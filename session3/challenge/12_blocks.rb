@@ -10,8 +10,7 @@
 # You see a lot of duplciation, but unfortunately, right in the middle of each of these
 # pieces of code, is a line or two that changes every time.
 #
-# Thinking a little bit, you realize that you could create a method that performs this
-# boiler plate code, then calls a block which does the custom code.
+# Thinking a little bit, you realize that you could create a method that per
 #
 # You decide to name it pay_by.
 #
