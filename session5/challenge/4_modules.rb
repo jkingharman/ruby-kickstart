@@ -47,4 +47,50 @@
 # Student.new(30, :sophmore) >= Student.new(20, :freshman)  # => true
 
 module OperatorGeneratorFromSpace
+
+	def ==(arg)
+		result = self <=> arg
+		case result
+			when 1 then false
+			when -1 then false
+			when 0 then true
+		end
+	end
+
+	def <(arg)
+		result = self <=> arg
+		case result
+		when -1 then true
+		when 0 then false
+		when 1 then false
+		end
+	end
+
+	def >(arg)
+		result = self <=> arg
+		case result
+		when -1 then false
+		when 0 then false
+		when 1 then true
+		end
+	end
+
+	def >=(arg)
+		result = self <=> arg
+		case result
+		when -1 then false
+		when 0 then true
+		when 1 then true
+		end
+	end
+
+	def <=(arg)
+		result = self <=> arg
+		case result
+		when -1 then true
+		when 0 then true
+		when 1 then false
+		end
+	end
+
 end
