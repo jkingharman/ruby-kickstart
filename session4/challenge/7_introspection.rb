@@ -4,3 +4,8 @@
 # end
 #
 # longest_method o # => :this_is_a_really_really_really_really_really_long_method_name
+
+def longest_method(obj)
+	method_arr = obj.methods
+	method_arr.sort_by {|met| met.size }[-1]
+end
