@@ -10,7 +10,8 @@
 # You see a lot of duplciation, but unfortunately, right in the middle of each of these
 # pieces of code, is a line or two that changes every time.
 #
-# Thinking a little bit, you realize that you could create a method that per
+# Thinking a little bit, you realize that you could create a method that performs this
+# boiler plate code, then calls a block which does the custom code.
 #
 # You decide to name it pay_by.
 #
@@ -21,37 +22,37 @@
 # NOTE: This code will only work with the rake tests, which will define the order and current_user
 # you will not be able to run this code outside of the test
 
-
-def pay_by_visa(order, ccn)
+def pay_by(order, &block)
   order.compute_cost
   order.compute_shipping
   order.compute_tax
-  order.payment :type => :visa, :ccn => ccn
-  order.verify_payment
+  block.call
   order.ship_goods
+end
+
+
+def pay_by_visa(order, ccn)
+  pay_by order do
+    order.payment :type => :visa, :ccn => ccn
+    order.verify_payment
+  end
 end
 
 def pay_by_check(order)
-  order.compute_cost
-  order.compute_shipping
-  order.compute_tax
-  order.payment :type => :check, :signed => true
-  order.ship_goods
+  pay_by order do
+    order.payment :type => :check, :signed => true
+  end
 end
 
 def pay_by_cash(order)
-  order.compute_cost
-  order.compute_shipping
-  order.compute_tax
-  order.payment :type => :cash
-  order.ship_goods
+  pay_by order  do
+    order.payment :type => :cash
+  end
 end
 
-def pay_by_store_credit(order)
-  order.compute_cost
-  order.compute_shipping
-  order.compute_tax
+def pay_by_store_credit(order, current_user)
+  pay_by order do
   order.payment :type => :store_credit
-  current_user.store_credit -= order.cost   # current_user is a method with no params (ie, the customer)
-  order.ship_goods
+  current_user.store_credit -= order.cost
+  end   # current_user is a method with no params (ie, the customer)
 end
